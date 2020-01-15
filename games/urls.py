@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from . import views
+from .views import list_games
 
 urlpatterns = [
-    url(r'^$', views.index, name = 'index'),
+    url('games', list_games, name = 'games'),
 ]
