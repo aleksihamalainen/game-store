@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Gamestore</title>
+</head>
+
+<body>
+    <h1>testi</h1>
+    <ul>
+        {% for game in games %}
+        <li>{{ game.title }}</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
