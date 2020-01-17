@@ -21,4 +21,5 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$', views.index, name = 'index'),
     url('', include('games.urls')),
+    url('', include('users.urls')),
 ]
