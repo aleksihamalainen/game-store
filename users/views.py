@@ -8,10 +8,10 @@ from django.shortcuts import render, redirect
 
 def profile(request):
 	user = request.user
-	if user is not None:
+	if user.is_authenticated:
 		return render(request, './profile.html', {'user': user})
 	else:
-		return HttpResponse("<p>You're not logged in!</p>")
+		return render(request, './no_profile.html')
 
 def login_view(request):
 	if request.method == 'POST':

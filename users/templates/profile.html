@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 	<div clas='profileinfo'>
-		<p>{{ user.username }}</p>
+		<p>Username: {{ user.username }}</p>
+		<p>Bio: {{ user.bio }}</p>
+		<p>User type: {{ user.account_type }}</p>
 	</div>
 {% endblock content %}
