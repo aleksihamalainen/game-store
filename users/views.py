@@ -14,6 +14,8 @@ def profile(request):
 		return render(request, './no_profile.html')
 
 def login_view(request):
+	if request.user.is_authenticated:
+		return redirect('profile')
 	if request.method == 'POST':
 		username = request.POST['username']
 		password = request.POST['password']
@@ -38,6 +40,8 @@ def register(request):
 		if form.is_valid():
 			acc = form.save()
 			acc_type = form.cleaned_data['account_type']
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password1']
 			acc_id = acc.id
 			if(acc_type == 'DEV'):
 				developer = Developer(user_id = acc_id)
@@ -45,7 +49,9 @@ def register(request):
 			else:
 				player = Player(user_id = acc_id)
 				player.save()
-			return redirect('index')
+			user = authenticate(request, username = username, password = password)
+			login(request, user)
+			return redirect('profile')
 		return redirect('index')
 	else:
 		form = RegistrationForm()

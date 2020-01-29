@@ -7,3 +7,6 @@ class Game(models.Model):
     description = models.TextField()
     url = models.URLField(default = '', max_length = 200)
     developer = models.ForeignKey('users.Developer', on_delete = models.CASCADE, related_name = 'games')
+
+    def __str__(self):
+	    return self.title
