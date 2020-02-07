@@ -18,10 +18,10 @@
         <form method = 'POST'>
             {% csrf_token %}
             {{ form.as_p }}
-            <button type = 'submit'>Register</button>
+            <button type = 'submit' class="btn btn-light">Register</button>
         </form>
     </div>
 {% endblock content%}
-    <a href="login" class="btn btn-light ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
+    <a href="login" class="btn btn-danger ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
 </body>
 </html>
