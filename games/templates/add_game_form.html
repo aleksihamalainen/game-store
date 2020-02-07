@@ -1,0 +1,11 @@
+{% block title %}Add game{% endblock title%}
+{% load static %}
+{% block content %}
+    <div class='addGameForm'>
+        <form method = 'POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = 'submit'>Submit game</button>
+        </form>
+    </div>
+{% endblock content%}

@@ -51,6 +51,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
             ],
+            options={
+                'permissions': (('can_add_game', 'Can add game'), ('can_remove_own_game', 'Can remove own game')),
+            },
         ),
         migrations.CreateModel(
             name='Player',
