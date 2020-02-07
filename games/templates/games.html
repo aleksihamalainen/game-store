@@ -16,6 +16,7 @@
     <ul>
         {% for game in games %}
         <li>{{ game.title }}</li>
+        <button onclick="location.href='../{{game.id}}'">View</button>
         {% endfor %}
     </ul>
 </body>
