@@ -39,6 +39,9 @@ def add_game(request):
                 developer = dev)
             game.save()
             return redirect('games')
+        else:
+            form = AddGameForm()
+            return render(request, './add_game_form.html', {'form': form})
     else:
         form = AddGameForm()
         return render(request, './add_game_form.html', {'form': form})
