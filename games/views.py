@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Game
 from users.models import Developer
 from .forms import AddGameForm
+from django.contrib.auth.decorators import login_required
 
 def list_games(request):
     games = Game.objects.all()
@@ -12,14 +13,14 @@ def view_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     return render(request, 'game.html', {'game': game})
 
+@login_required
 def purchase_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     return render(request, 'payment.html', {'game': game})
 
+@login_required
 def add_game(request):
     user = request.user
-    if not user.is_authenticated:
-        return redirect('./no_profile.html')
     if user.account_type != 'DEV':
         return HttpResponse('<p>You are a player</p>')
     if request.method == 'POST':

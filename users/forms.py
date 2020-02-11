@@ -15,7 +15,7 @@ class RegistrationForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
 	username = forms.CharField(required = True, max_length = 255)
-	password = forms.CharField(required = True, max_length = 255)
+	password = forms.CharField(required = True, max_length = 255, widget=forms.PasswordInput)
 
 	class Meta:
 		model = Account

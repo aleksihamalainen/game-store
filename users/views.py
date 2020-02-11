@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from .forms import RegistrationForm, LoginForm
 from .models import Developer, Player
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def profile(request):
-	user = request.user
-	if user.is_authenticated:
-		return render(request, './profile.html', {'user': user})
-	else:
-		return render(request, './no_profile.html')
+	return render(request, './profile.html', {'user': request.user})
 
 def login_view(request):
 	if request.user.is_authenticated:
@@ -43,7 +39,7 @@ def register(request):
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			acc_id = acc.id
-			if(acc_type == 'DEV'):
+			if acc_type == 'DEV':
 				developer = Developer(user_id = acc_id)
 				developer.save()
 			else:
@@ -52,7 +48,6 @@ def register(request):
 			user = authenticate(request, username = username, password = password)
 			login(request, user)
 			return redirect('profile')
-		return redirect('index')
 	else:
 		form = RegistrationForm()
 		return render(request, './register.html', {'form' : form})
