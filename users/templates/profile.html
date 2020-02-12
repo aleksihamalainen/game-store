@@ -6,5 +6,8 @@
 		<p>Bio: {{ user.bio }}</p>
 		<p>User type: {{ user.account_type }}</p>
 		<button onclick="location.href='./logout'">Log out</button>
+		{% for game in user.owned_games.all %}
+		<li>{{game.title}}</li>
+		{% endfor %}
 	</div>
 {% endblock content %}

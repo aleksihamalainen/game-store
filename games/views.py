@@ -4,6 +4,7 @@ from .models import Game
 from users.models import Developer
 from .forms import AddGameForm
 from django.contrib.auth.decorators import login_required
+from hashlib import md5
 
 def list_games(request):
     games = Game.objects.all()
@@ -16,7 +17,24 @@ def view_game(request, game_id):
 @login_required
 def purchase_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
-    return render(request, 'payment.html', {'game': game})
+    sid = "azLMOnNlbGxlcg=="
+    pid = str(game.id)
+    secret = "DbG5kmGnFmWBOh6SsWHRstQYZ7QA"
+    checksumstr = f"pid={pid:s}&sid={sid:s}&amount={game.price:.2f}&token={secret:s}"
+    checksum = md5(checksumstr.encode('utf-8')).hexdigest()
+    return render(request, 'payment.html', {'game': game, 'sid': sid, 'pid': pid, 'checksum': checksum})
+
+@login_required
+def payment(request, status, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if status == 'success':
+        user.owned_games.add(game)
+        return render(request, 'success.html')
+    elif status == 'cancel':
+        return render(request, 'cancel.html')
+    else:
+        return render(request, 'error.html')        
 
 @login_required
 def add_game(request):
