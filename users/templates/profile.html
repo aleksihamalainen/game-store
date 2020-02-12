@@ -3,11 +3,17 @@
 {% block content %}
 	<div class='profileinfo'>
 		<p>Username: {{ user.username }}</p>
+		<p>Email: {{ user.email }}</p>
 		<p>Bio: {{ user.bio }}</p>
 		<p>User type: {{ user.account_type }}</p>
+		<div>
+			<h3>Owned games</h3>
+			{% for game in user.owned_games.all %}
+				<p>{{ game.title }}</p>
+			{% endfor %}
+		</div>
 		<button onclick="location.href='./logout'">Log out</button>
-		{% for game in user.owned_games.all %}
-		<li>{{game.title}}</li>
-		{% endfor %}
+		<button onclick="location.href='./edit'">Edit account</button>
+		<button onclick="location.href='./delete'">Delete account</button>
 	</div>
 {% endblock content %}
