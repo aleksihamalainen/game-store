@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, EditProfileForm
 from .models import Developer, Player
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
@@ -26,6 +26,24 @@ def login_view(request):
 		form = LoginForm()
 		return render(request, './login.html', {'form': form})
 	
+@login_required
+def edit_profile_view(request):
+	if request.method == 'POST':
+		form = EditProfileForm(request.POST, instance = request.user)
+		if form.is_valid():
+			form.save()
+			return redirect('profile')
+		else:
+			form = EditProfileForm(instance = request.user)
+			return render(request, 'edit_profile.html', {'form': form})	
+	else:
+		form = EditProfileForm(instance = request.user)
+		return render(request, 'edit_profile.html', {'form': form})
+
+@login_required
+def delete_profile_view(request):
+	return redirect('profile')
+
 def logout_view(request):
 	logout(request)
 	return redirect('index')

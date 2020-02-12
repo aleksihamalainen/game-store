@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import (
+	UserCreationForm,
+	AuthenticationForm,
+	UserChangeForm)
 
 from .models import Account
 
@@ -20,3 +23,9 @@ class LoginForm(AuthenticationForm):
 	class Meta:
 		model = Account
 		fields = ('username', 'password')
+
+class EditProfileForm(UserChangeForm):
+	
+	class Meta:
+		model = Account
+		fields = ('username','email', 'bio', 'password')
