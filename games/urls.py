@@ -6,6 +6,6 @@ urlpatterns = [
     path('games/<int:game_id>/', view_game, name = 'view_game'),
     path('games/purchase/<int:game_id>/', purchase_game, name = 'purchase_game'),
     path('games/delete/<int:game_id>/', delete_game, name='delete_game'),
-    path('games/add_game/', add_game, name = 'add_game'),
-    path('payment/<int:game_id>/<str:status>/', payment, name = 'payment'),
+    path('games/add/', add_game, name = 'add_game'),
+    path('payment/<int:game_id>/<str:status>/', payment, name = 'payment')
 ]

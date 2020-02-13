@@ -20,7 +20,7 @@ def login_view(request):
 		user = authenticate(request, username = username, password = password)
 		if user is not None:
 			login(request, user)
-			return redirect('profile')
+			return redirect('index')
 		else:
 			return redirect('index')
 	else:
@@ -71,7 +71,7 @@ def register(request):
 				player.save()
 			user = authenticate(request, username = username, password = password)
 			login(request, user)
-			return redirect('profile')
+			return redirect('index')
 	else:
 		form = RegistrationForm()
 		return render(request, './register.html', {'form' : form})
