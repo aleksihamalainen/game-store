@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-from .forms import RegistrationForm, LoginForm, EditProfileForm
+from .forms import RegistrationForm, LoginForm, EditProfileForm, DeleteAccountForm
+from django.core.exceptions import PermissionDenied
 from .models import Developer, Player
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
@@ -42,7 +43,12 @@ def edit_profile_view(request):
 
 @login_required
 def delete_profile_view(request):
-	return redirect('profile')
+	if request.method == 'POST':
+		request.user.delete()
+		return redirect('index')
+	else:
+		form = DeleteAccountForm()
+		return render(request, 'delete_profile.html', {'form': form})
 
 def logout_view(request):
 	logout(request)

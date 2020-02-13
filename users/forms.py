@@ -24,6 +24,12 @@ class LoginForm(AuthenticationForm):
 		model = Account
 		fields = ('username', 'password')
 
+class DeleteAccountForm():
+
+	class Meta:
+		model = Account
+		fields = ()
+
 class EditProfileForm(UserChangeForm):
 	
 	class Meta:

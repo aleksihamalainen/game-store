@@ -1,0 +1,11 @@
+{% block title %}Delete Game{% endblock title %}
+{% load static %}
+{% block content %}
+	<div class='profile_edit'>
+		<form method = 'POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = 'submit'>Delete</button>
+        </form>
+	</div>
+{% endblock content %}

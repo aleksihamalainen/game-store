@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from .models import Game
-from users.models import Developer
-from .forms import AddGameForm
+from users.models import Developer, Account
+from .forms import AddGameForm, DeleteGameForm
 from django.contrib.auth.decorators import login_required
 from hashlib import md5
 
@@ -13,6 +14,21 @@ def list_games(request):
 def view_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     return render(request, 'game.html', {'game': game})
+
+@login_required
+def delete_game(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    developer_id = game.developer.user_id
+    if user.id == developer_id:
+        if request.method == 'POST':
+            game.delete()
+            return redirect('games')
+        else:
+            form = DeleteGameForm()
+            return render(request, 'delete_game.html', {'form': form})
+    else:
+        raise PermissionDenied()
 
 @login_required
 def purchase_game(request, game_id):
@@ -40,7 +56,7 @@ def payment(request, status, game_id):
 def add_game(request):
     user = request.user
     if user.account_type != 'DEV':
-        return HttpResponse('<p>You are a player</p>')
+        raise PermissionDenied()
     if request.method == 'POST':
         form = AddGameForm(request.POST)
         if form.is_valid():
