@@ -13,6 +13,12 @@ def list_games(request):
 
 def view_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
+    user = request.user
+    if user.is_authenticated:
+        if user.id == game.developer.user_id:
+            return render(request, 'game_dev.html', {'game': game})
+        else:
+            return render(request, 'game.html', {'game': game})
     return render(request, 'game.html', {'game': game})
 
 @login_required
