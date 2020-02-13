@@ -72,6 +72,9 @@ def register(request):
 			user = authenticate(request, username = username, password = password)
 			login(request, user)
 			return redirect('index')
+		else:
+			form = RegistrationForm()
+			return render(request, './register.html', {'form' : form})
 	else:
 		form = RegistrationForm()
 		return render(request, './register.html', {'form' : form})
