@@ -3,7 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from .models import Game
 from users.models import Developer, Account
-from .forms import AddGameForm, DeleteGameForm
+from .forms import AddGameForm, DeleteGameForm, EditGameForm
 from django.contrib.auth.decorators import login_required
 from hashlib import md5
 
@@ -22,6 +22,22 @@ def view_game(request, game_id):
     return render(request, 'game.html', {'game': game})
 
 @login_required
+def edit_game(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if user.id == game.developer.user_id:
+        if request.method == 'POST':
+            form = EditGameForm(request.POST, instance = game)
+            if form.is_valid():
+                form.save()
+                return redirect(f'/games/{game.id}/')
+        else:
+            form = EditGameForm(instance = game)
+            return render(request, 'edit_game.html', {'form': form, 'game': game})
+    else:
+        raise PermissionDenied()
+
+@login_required
 def delete_game(request, game_id):
     user = request.user
     game = get_object_or_404(Game, id = game_id)
@@ -32,7 +48,7 @@ def delete_game(request, game_id):
             return redirect('games')
         else:
             form = DeleteGameForm()
-            return render(request, 'delete_game.html', {'form': form})
+            return render(request, 'delete_game.html', {'form': form, 'game': game})
     else:
         raise PermissionDenied()
 

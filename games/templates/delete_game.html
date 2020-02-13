@@ -5,7 +5,9 @@
 		<form method = 'POST'>
             {% csrf_token %}
             {{ form.as_p }}
+            
             <button type = 'submit'>Delete</button>
         </form>
+        <button onclick='location.href="/games/{{game.id}}/"'>Cancel</button>
 	</div>
 {% endblock content %}

@@ -19,3 +19,9 @@ class DeleteGameForm(ModelForm):
     class Meta:
         model = Game
         fields = ()
+
+class EditGameForm(ModelForm):
+
+    class Meta:
+        model = Game
+        fields = ('title', 'description', 'price', 'url')
