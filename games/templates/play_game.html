@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{game.title}}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function receiveMessage(event) {
+            switch(event.data.messageType) {
+                case 'SCORE': {
+                    const score = event.data.score;
+                    console.log(score)
+                    $.ajax({
+                        url:'/games/submit_score/{{game.id}}/',
+                        data: {
+                            'score': score,
+                        }
+                    })
+                    break;
+                }
+                default: console.log(event.data.messageType);
+            }
+        }
+        window.addEventListener("message", receiveMessage, false);
+        });
+    </script>
+</head>
+<body>
+{% block title %}{{game.title}}{% endblock title%}
+{% load static %}
+{% block content %}
+    
+    <div class='playGame'>
+        <form>
+            <iframe src="{{game.url}}">
+
+            </iframe>
+            <iframe name="score_list_frame" src="/games/score/{{game.id}}">
+
+            </iframe>
+        </form>
+    </div>
+{% endblock content%}
+</body>
+</html>

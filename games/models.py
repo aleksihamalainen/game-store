@@ -7,3 +7,8 @@ class Game(models.Model):
     description = models.TextField()
     url = models.URLField(default = '', max_length = 200)
     developer = models.ForeignKey('users.Developer', on_delete = models.CASCADE, related_name = 'games')
+
+class Score(models.Model):
+    score = models.IntegerField()
+    user = models.ForeignKey('users.Account', on_delete = models.CASCADE)
+    game = models.ForeignKey('Game', on_delete = models.CASCADE)

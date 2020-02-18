@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
-from .models import Game
+from .models import Game, Score
 from users.models import Developer, Account
 from .forms import AddGameForm, DeleteGameForm, EditGameForm
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,8 @@ def view_game(request, game_id):
         if user.id == game.developer.user_id:
             return render(request, 'game_dev.html', {'game': game})
         else:
-            return render(request, 'game.html', {'game': game})
+            owns_game = user.owned_games.filter(pk=game_id).count() != 0
+            return render(request, 'game.html', {'game': game, 'owns_game': owns_game})
     return render(request, 'game.html', {'game': game})
 
 @login_required
@@ -51,6 +52,53 @@ def delete_game(request, game_id):
             return render(request, 'delete_game.html', {'form': form, 'game': game})
     else:
         raise PermissionDenied()
+
+
+@login_required
+def play_game(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
+        return render(request, 'play_game.html', {'game' : game})
+    else:
+        raise PermissionDenied()
+
+@login_required
+def score_list(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
+        scores = Score.objects.filter(game_id = game_id).order_by('-score')
+        if scores.count() > 0:
+            return render(request, 'score_list.html', {'scores': scores, 'game': game})
+        else:
+            return HttpResponse('No scores exist for this game')
+    else:
+        raise PermissionDenied()
+
+@login_required
+def submit_score(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
+        new_score = request.GET['score']
+        try:
+            prev_score = Score.objects.get(game_id = game_id, user_id = user.id)
+        except:
+            score = Score()
+            score.score = new_score
+            score.user = user
+            score.game = game
+            score.save()
+            return HttpResponse('success')
+        if prev_score.score >= int(new_score):
+            return HttpResponse('fail')
+        else:
+            prev_score.score = new_score
+            prev_score.save()
+            return HttpResponse('success')
+    else:
+        return HttpResponse('fail')
 
 @login_required
 def purchase_game(request, game_id):

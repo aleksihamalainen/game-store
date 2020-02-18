@@ -1,3 +1,6 @@
 Game {{game.title}}
 <button onclick="location.href='../purchase/{{game.id}}'">Buy</button>
+{% if owns_game %}
+<button onclick="location.href='/games/play/{{game.id}}'">Play</button>
+{% endif %}
 <button onclick="location.href='../all'">Back</button>
