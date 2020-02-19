@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  {% include 'navbar.html' %}
   Game {{game.title}}
   {% if owns_game %}
   <button onclick="location.href='/games/play/{{game.id}}'">Play</button>
