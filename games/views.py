@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
-from .models import Game, Score
+from .models import Game, Score, Transaction
 from users.models import Developer, Account
 from .forms import AddGameForm, DeleteGameForm, EditGameForm
 from django.contrib.auth.decorators import login_required

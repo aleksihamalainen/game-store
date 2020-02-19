@@ -23,11 +23,23 @@
 			<p>{{ game.title }} <button onclick="location.href='/games/{{game.id}}'">View game</button></p>
 			{% endfor %}
 		</div>
+		<div>
+			<h3>Payment history</h3>
+			{% for transaction in transactions %}
+			<p>{{transaction.game.title}} --- {{ transaction.timestamp }}</p>
+			{% endfor %}
+		</div>
 		{% if user.account_type == 'DEV' %}
 		<div class="developed_games">
 			<h3>Developed games</h3>
 			{% for dev_game in developed_games.all %}
 			<p>{{ dev_game.title }} <button onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
+			{% endfor %}
+		</div>
+		<div>
+			<h3>Sales statistics</h3>
+			{% for transaction in transactions %}
+			<p>{{transaction.game.title}} --- {{ transaction.timestamp }}</p>
 			{% endfor %}
 		</div>
 		{% endif %}
