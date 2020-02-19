@@ -2,13 +2,20 @@ from __future__ import unicode_literals
 from .forms import RegistrationForm, LoginForm, EditProfileForm, DeleteAccountForm
 from django.core.exceptions import PermissionDenied
 from .models import Developer, Player
+from games.models import Game
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def profile(request):
-	return render(request, './profile.html', {'user': request.user})
+	user = request.user
+	if user.account_type == 'DEV':
+		developer = get_object_or_404(Developer, user_id = user.id)
+		developed_games = Game.objects.filter(developer = developer.user_id)
+		return render(request, './profile.html', {'user': user, 'developed_games': developed_games})
+	else:
+		return render(request, './profile.html', {'user': user})
 
 def login_view(request):
 	if request.user.is_authenticated:

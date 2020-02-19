@@ -105,7 +105,7 @@ def purchase_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     user = request.user
     if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
-            return redirect(f'/games/{game.id}/')
+        return redirect(f'/games/{game.id}/')
     sid = "azLMOnNlbGxlcg=="
     pid = str(game.id)
     secret = "DbG5kmGnFmWBOh6SsWHRstQYZ7QA"
