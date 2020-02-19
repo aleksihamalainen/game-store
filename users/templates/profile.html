@@ -1,11 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Profile</title>
+
+	<title>Gamestore</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
+
 <body>
-{% block content %}
+	{% block content %}
 	<div class='profileinfo'>
 		<p>Username: {{ user.username }}</p>
 		<p>Email: {{ user.email }}</p>
@@ -14,22 +19,23 @@
 		<div>
 			<h3>Owned games</h3>
 			{% for game in user.owned_games.all %}
-				<p>{{ game.title }} <button onclick="location.href='/games/{{game.id}}'">View game</button></p>
+			<p>{{ game.title }} <button onclick="location.href='/games/{{game.id}}'">View game</button></p>
 			{% endfor %}
 		</div>
-			{% if user.account_type == 'DEV' %}
-				<div class="developed_games">
-					<h3>Developed games</h3>
-					{% for dev_game in developed_games.all %}
-						<p>{{ dev_game.title }} <button onclick="location.href='/games/{{dev_game.id}}'">View game</button></p> 
-					{% endfor %}
-				</div>
-			{% endif %}
+		{% if user.account_type == 'DEV' %}
+		<div class="developed_games">
+			<h3>Developed games</h3>
+			{% for dev_game in developed_games.all %}
+			<p>{{ dev_game.title }} <button onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
+			{% endfor %}
+		</div>
+		{% endif %}
 		<button onclick="location.href='./logout'">Log out</button>
 		<button onclick="location.href='./edit'">Edit account</button>
 		<button onclick="location.href='./delete'">Delete account</button>
 		<button onclick="location.href='/'">Back</button>
 	</div>
-{% endblock content %}
+	{% endblock content %}
 </body>
+
 </html>

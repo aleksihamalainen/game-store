@@ -1,18 +1,31 @@
-{% block title %}{{game.title}} Score{% endblock title%}
 {% load static %}
-{% block content %}
-    <div class="scoreList">
-            <table>
-                <tr>
-                    <th>Player</th>
-                    <th>Score</th>
-                </tr>
-                {% for score in scores %}
-                    <tr>
-                        <td>{{score.user}}</td>
-                        <td>{{score.score}}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-    </div>
-{% endblock content%}
+<html>
+
+<head>
+
+  <title>Gamestore</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  {% block content %}
+  <div class="scoreList">
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Score</th>
+      </tr>
+      {% for score in scores %}
+      <tr>
+        <td>{{score.user}}</td>
+        <td>{{score.score}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endblock content%}
+</body>
+
+</html>

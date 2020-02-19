@@ -6,27 +6,12 @@
 <head>
 
   <title>Gamestore</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
 <body>
-  <div class="logo">
-    <h1>Gamestore</h1>
-    <button onclick="location.href='games/all'">Browse games</button>
-    {% if request.user.is_authenticated %}
-    <button onclick="location.href='logout'">Log out</button>
-    <button onclick="location.href='profile'">Profile</button>
-    <p>You are now logged in as {{request.user.account_type}}</p>
-    {% if request.user.account_type == 'DEV' %}
-    <button onclick="location.href='games/add'">Add game</button>
-    {% endif %}
-    {% else %}
-    <button onclick="location.href='login'">Log in</button>
-    <button onclick="location.href='register'">Register</button>
-    {% endif %}
-  </div>
+  {% include 'navbar.html' %}
 </body>
 
 </html>

@@ -1,7 +1,21 @@
-Game {{game.title}}
-{% if owns_game %}
-<button onclick="location.href='/games/play/{{game.id}}'">Play</button>
-{% else %}
-<button onclick="location.href='../purchase/{{game.id}}'">Buy</button>
-{% endif %}
-<button onclick="location.href='../all'">Back</button>
+{% load static %}
+<html>
+
+<head>
+
+  <title>Gamestore</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+</head>
+
+<body>
+  Game {{game.title}}
+  {% if owns_game %}
+  <button onclick="location.href='/games/play/{{game.id}}'">Play</button>
+  {% else %}
+  <button onclick="location.href='../purchase/{{game.id}}'">Buy</button>
+  {% endif %}
+  <button onclick="location.href='../all'">Back</button>
+</body>
+
+</html>

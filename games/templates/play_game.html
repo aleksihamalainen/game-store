@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>{{game.title}}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function receiveMessage(event) {
-            switch(event.data.messageType) {
-                case 'SCORE': {
-                    const score = event.data.score;
-                    console.log(score)
-                    $.ajax({
-                        url:'/games/submit_score/{{game.id}}/',
-                        data: {
-                            'score': score,
-                        }
-                    })
-                    break;
-                }
-                default: console.log(event.data.messageType);
-            }
+  <title>{{game.title}}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      function receiveMessage(event) {
+        switch (event.data.messageType) {
+          case 'SCORE': {
+            const score = event.data.score;
+            console.log(score)
+            $.ajax({
+              url: '/games/submit_score/{{game.id}}/',
+              data: {
+                'score': score,
+              }
+            })
+            break;
+          }
+          default:
+            console.log(event.data.messageType);
         }
-        window.addEventListener("message", receiveMessage, false);
-        });
-    </script>
+      }
+      window.addEventListener("message", receiveMessage, false);
+    });
+  </script>
 </head>
+
 <body>
-{% block title %}{{game.title}}{% endblock title%}
-{% load static %}
-{% block content %}
-    
-    <div class='playGame'>
-        <form>
-            <iframe src="{{game.url}}">
+  {% include 'navbar.html' %}
+  {% block title %}{{game.title}}{% endblock title%}
+  {% load static %}
+  {% block content %}
 
-            </iframe>
-            <iframe name="score_list_frame" src="/games/score/{{game.id}}">
+  <div class='playGame'>
+    <form>
+      <iframe src="{{game.url}}">
 
-            </iframe>
-        </form>
-    </div>
-{% endblock content%}
+      </iframe>
+      <iframe name="score_list_frame" src="/games/score/{{game.id}}">
+
+      </iframe>
+    </form>
+  </div>
+  {% endblock content%}
 </body>
+
 </html>

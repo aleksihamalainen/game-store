@@ -4,21 +4,22 @@
 <html lang="en">
 
 <head>
-    <title>Gamestore</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+  <title>Gamestore</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
 <body>
+  {% include 'navbar.html' %}
   <form>
     <input class="back-button" type="button" value="Back" onclick="location.href='/'">
   </form>
-    <h1>Games</h1>
-    <ul>
-        {% for game in games %}
-        <li>{{ game.title }}</li>
-        <button onclick="location.href='../{{game.id}}'">View</button>
-        {% endfor %}
-    </ul>
+  <h1>Games</h1>
+  <ul>
+    {% for game in games %}
+    <li>{{ game.title }}</li>
+    <button onclick="location.href='../{{game.id}}'">View</button>
+    {% endfor %}
+  </ul>
 </body>
 
 </html>

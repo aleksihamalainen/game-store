@@ -1,57 +1,15 @@
 body {
-  background-color: #333;
+  background-color: #555;
   font-family: sans-serif;
 }
 
-.search {
-  display: flex;
-  position: relative;
-  width: 100%;
-}
-
-.searchTerm {
- border: 3px solid black;
- border-right: none;
- padding: 5px;
- height: 100%;
- border-radius: 5px 0 0 5px;
- outline: none;
- color: #9DBFAF;
- width: 90%;
-}
-
-.searchButton {
-  height: 34px;
-  border: 3px solid black;
-  border-left: none;
-  background: #333;
-  text-align: center;
-  color: white;
-  border-radius: 0 5px 5px 0;
-}
-
-.searchButton:hover {
-  background: #333;
-  cursor: pointer;
-}
-
 .navbar {
+  background: #333;
   width: 100%;
   position: absolute;
 }
 
-.logo {
-  padding: 10px;
-  display: block;
+#logo {
   color: white;
-  text-align: center;
-}
-
-.back-button {
-  display: block;
-  background: #333;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
+  font-size: 30px;
 }
