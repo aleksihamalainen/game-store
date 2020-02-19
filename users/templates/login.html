@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 
   <title>Gamestore</title>
@@ -10,22 +11,18 @@
 </head>
 
 <body>
-  <div class="logo">
-    <h1>Gamestore</h1>
-  </div>
+  {% include 'navbar.html' %}
   {% block content %}
-      <div class='loginForm text-white ml-5'>
-          <form method = 'POST'>
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type = 'submit' class="btn btn-primary">Log in</button>
-          </form>
-      </div>
+  <div class='loginForm text-white ml-5'>
+    <form method='POST'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type='submit' class="btn btn-primary">Log in</button>
+    </form>
+  </div>
   {% endblock content%}
   <a href="register" class="btn btn-light ml-5 mt-2 active" role="button" aria-pressed="true">Register</a>
   <a href="/" class="btn btn-danger ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
 </body>
-<script>
 
-</script>
 </html>

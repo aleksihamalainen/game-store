@@ -1,13 +1,28 @@
-<form action="https://tilkkutakki.cs.aalto.fi/payments/pay" method="POST">
+{% load static %}
+<html>
+
+<head>
+
+  <title>Gamestore</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  <form action="https://tilkkutakki.cs.aalto.fi/payments/pay" method="POST">
     <input type="hidden" name="pid" value={{pid}}>
     <input type="hidden" name="sid" value={{sid}}>
     <input type="hidden" name="amount" value={{game.price}}>
     <input type="hidden" name="success_url" value="http://localhost:8000/payment/{{game.id}}/success">
     <input type="hidden" name="cancel_url" value="http://localhost:8000/payment/{{game.id}}/cancel">
     <input type="hidden" name="error_url" value="http://localhost:8000/payment/{{game.id}}/error">
-    <input type="hidden" name="checksum"value="{{checksum}}">
+    <input type="hidden" name="checksum" value="{{checksum}}">
     Amount to be paid {{game.price}}
     <input type="submit" value="Pay">
   </form>
 
   <button onclick="location.href='../../{{game.id}}'">Back</button>
+</body>
+
+</html>

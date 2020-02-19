@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 
   <title>Gamestore</title>
@@ -10,18 +11,17 @@
 </head>
 
 <body>
-  <div class="logo">
-    <h1>Registration</h1>
+  {% include 'navbar.html' %}
+  {% block content %}
+  <div class='registrationForm text-white ml-5'>
+    <form method='POST'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type='submit' class="btn btn-light">Register</button>
+    </form>
   </div>
-{% block content %}
-    <div class='registrationForm text-white ml-5'>
-        <form method = 'POST'>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type = 'submit' class="btn btn-light">Register</button>
-        </form>
-    </div>
-{% endblock content%}
-    <a href="/" class="btn btn-danger ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
+  {% endblock content%}
+  <a href="/" class="btn btn-danger ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
 </body>
+
 </html>
