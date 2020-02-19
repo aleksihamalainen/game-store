@@ -103,6 +103,9 @@ def submit_score(request, game_id):
 @login_required
 def purchase_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
+    user = request.user
+    if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
+            redirect(f'/games/{game.id}/')
     sid = "azLMOnNlbGxlcg=="
     pid = str(game.id)
     secret = "DbG5kmGnFmWBOh6SsWHRstQYZ7QA"
@@ -116,6 +119,7 @@ def payment(request, status, game_id):
     game = get_object_or_404(Game, id = game_id)
     if status == 'success':
         user.owned_games.add(game)
+        user.save()
         return render(request, 'success.html')
     elif status == 'cancel':
         return render(request, 'cancel.html')
