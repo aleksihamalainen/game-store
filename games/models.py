@@ -12,3 +12,8 @@ class Score(models.Model):
     score = models.IntegerField()
     user = models.ForeignKey('users.Account', on_delete = models.CASCADE)
     game = models.ForeignKey('Game', on_delete = models.CASCADE)
+
+class Transaction(models.Model):
+    user = models.ForeignKey('users.Account', on_delete = models.CASCADE)
+    game = models.ForeignKey('Game', on_delete = models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
