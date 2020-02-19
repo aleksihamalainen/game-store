@@ -118,7 +118,9 @@ def payment(request, status, game_id):
     user = request.user
     game = get_object_or_404(Game, id = game_id)
     if status == 'success':
+        transaction = Transaction(user = user, game = game)
         user.owned_games.add(game)
+        transaction.save()
         user.save()
         return render(request, 'success.html')
     elif status == 'cancel':
