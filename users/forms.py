@@ -30,8 +30,8 @@ class DeleteAccountForm():
 		model = Account
 		fields = ()
 
-class EditProfileForm(UserChangeForm):
+class EditProfileForm(forms.ModelForm):
 	
 	class Meta:
 		model = Account
-		fields = ('username','email', 'bio', 'password')
+		fields = ('username','email', 'bio')

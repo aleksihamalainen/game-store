@@ -36,12 +36,6 @@
 			<p>{{ dev_game.title }} <button onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
 			{% endfor %}
 		</div>
-		<div>
-			<h3>Sales statistics</h3>
-			{% for transaction in transactions %}
-			<p>{{transaction.game.title}} --- {{ transaction.timestamp }}</p>
-			{% endfor %}
-		</div>
 		{% endif %}
 		<button onclick="location.href='./logout'">Log out</button>
 		<button onclick="location.href='./edit'">Edit account</button>

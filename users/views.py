@@ -15,9 +15,9 @@ def profile(request):
 	if user.account_type == 'DEV':
 		developer = get_object_or_404(Developer, user_id = user.id)
 		developed_games = Game.objects.filter(developer = developer.user_id)
-		return render(request, './profile.html', {'user': user, 'transactions': transactions, 'developed_games': developed_games})
+		return render(request, 'profile.html', {'user': user, 'transactions': transactions, 'developed_games': developed_games})
 	else:
-		return render(request, './profile.html', {'user': user, 'transactions': transactions})
+		return render(request, 'profile.html', {'user': user, 'transactions': transactions})
 
 def login_view(request):
 	if request.user.is_authenticated:
@@ -34,10 +34,11 @@ def login_view(request):
 			return redirect('index')
 	else:
 		form = LoginForm()
-		return render(request, './login.html', {'form': form})
-	
+		return render(request, 'login.html', {'form': form})
+
 @login_required
 def edit_profile_view(request):
+	user = request.user
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, instance = request.user)
 		if form.is_valid():
@@ -45,7 +46,8 @@ def edit_profile_view(request):
 			return redirect('profile')
 		else:
 			form = EditProfileForm(instance = request.user)
-			return render(request, 'edit_profile.html', {'form': form})	
+			return render(request, 'edit_profile.html', {'form': form})
+
 	else:
 		form = EditProfileForm(instance = request.user)
 		return render(request, 'edit_profile.html', {'form': form})
@@ -99,7 +101,7 @@ def register(request):
 			return redirect('index')
 		else:
 			form = RegistrationForm()
-			return render(request, './register.html', {'form' : form})
+			return render(request, 'register.html', {'form' : form})
 	else:
 		form = RegistrationForm()
-		return render(request, './register.html', {'form' : form})
+		return render(request, 'register.html', {'form' : form})

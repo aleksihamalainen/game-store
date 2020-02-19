@@ -12,12 +12,13 @@
 	{% include 'navbar.html' %}
 	{% block content %}
 	<div class='profile_edit'>
-		<form method='POST'>
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type='submit'>Save</button>
-		</form>
-		<button onclick="location.href='/profile/'">Cancel</button>
+		<form method = 'POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = 'submit'>Save</button>
+        </form>
+        <button onclick="location.href='/profile/edit/change_password'">Change password</button>
+        <button onclick="location.href='/profile/'">Cancel</button>
 	</div>
 	{% endblock content %}
 </body>
