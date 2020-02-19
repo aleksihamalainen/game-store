@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 from .forms import RegistrationForm, LoginForm, EditProfileForm, DeleteAccountForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import PermissionDenied
 from .models import Developer, Player
 from games.models import Game
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -46,6 +47,22 @@ def edit_profile_view(request):
 			return render(request, 'edit_profile.html', {'form': form})	
 	else:
 		form = EditProfileForm(instance = request.user)
+		return render(request, 'edit_profile.html', {'form': form})
+
+@login_required
+def change_password_view(request):
+	user = request.user
+	if request.method == 'POST':
+		form = PasswordChangeForm(user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request, user)
+			return redirect('profile')
+		else:
+			form = PasswordChangeForm(user)
+			return render(request, 'edit_profile.html', {'form': form})
+	else:
+		form = PasswordChangeForm(user)
 		return render(request, 'edit_profile.html', {'form': form})
 
 @login_required
