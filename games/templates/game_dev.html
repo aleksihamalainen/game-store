@@ -13,20 +13,16 @@
   <h2 class="d-flex justify-content-center">
     Game {{game.title}}
   </h2>
+  <h3 class="d-flex justify-content-center">Sales statistics</h3>
+  <p class="d-flex justify-content-center">Sold: {{transactions.count}}</p>
+  {% for transaction in transactions %}
+  <p class="d-flex justify-content-center">{{ transaction.timestamp }}</p>
+  {% endfor %}
   <div class="d-flex justify-content-center">
-    <div>
-      <h3>Sales statistics</h3>
-      <p>Sold: {{transactions.count}}</p>
-      {% for transaction in transactions %}
-      <p>{{ transaction.timestamp }}</p>
-      {% endfor %}
-    </div>
-    <div>
-      <button class="btn btn-light" onclick="location.href='/games/delete/{{game.id}}'">Delete</button>
-      <button class="btn btn-light" onclick="location.href='/games/edit/{{game.id}}'">Edit</button>
-      <button class="btn btn-light" onclick="location.href='/games/play/{{game.id}}'">Play</button>
-      <button class="btn btn-light" onclick="location.href='/games/all'">Back</button>
-    </div>
+    <button class="btn btn-light" onclick="location.href='/games/delete/{{game.id}}'">Delete</button>
+    <button class="btn btn-light" onclick="location.href='/games/edit/{{game.id}}'">Edit</button>
+    <button class="btn btn-light" onclick="location.href='/games/play/{{game.id}}'">Play</button>
+    <button class="btn btn-light" onclick="location.href='/games/all'">Back</button>
   </div>
 </body>
 
