@@ -14,7 +14,6 @@
         switch (event.data.messageType) {
           case 'SCORE': {
             const score = event.data.score;
-            console.log(score)
             $.ajax({
               url: '/games/submit_score/{{game.id}}/',
               data: {
@@ -42,10 +41,22 @@
       <iframe src="{{game.url}}">
 
       </iframe>
-      <iframe name="score_list_frame" src="/games/score/{{game.id}}">
-
-      </iframe>
     </form>
+  </div>
+  <div class="scoreList" style="float:left;">
+    <h3>Highscores</h3>
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Score</th>
+      </tr>
+      {% for score in scores %}
+      <tr>
+        <td>{{score.user}}</td>
+        <td>{{score.score}}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </div>
   {% endblock content%}
 </body>

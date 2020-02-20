@@ -59,7 +59,8 @@ def play_game(request, game_id):
     user = request.user
     game = get_object_or_404(Game, id = game_id)
     if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
-        return render(request, 'play_game.html', {'game' : game})
+        scores = Score.objects.filter(game_id = game_id).order_by('-score')
+        return render(request, 'play_game.html', {'game' : game, 'scores': scores})
     else:
         raise PermissionDenied()
 
@@ -69,10 +70,7 @@ def score_list(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
         scores = Score.objects.filter(game_id = game_id).order_by('-score')
-        if scores.count() > 0:
-            return render(request, 'score_list.html', {'scores': scores, 'game': game})
-        else:
-            return HttpResponse('No scores exist for this game')
+        return render(request, 'score_list.html', {'scores': scores, 'game': game})
     else:
         raise PermissionDenied()
 
