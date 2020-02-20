@@ -16,7 +16,8 @@ def view_game(request, game_id):
     user = request.user
     if user.is_authenticated:
         if user.id == game.developer.user_id:
-            return render(request, 'game_dev.html', {'game': game})
+            transactions = Transaction.objects.filter(game = game)
+            return render(request, 'game_dev.html', {'game': game, 'transactions': transactions})
         else:
             owns_game = user.owned_games.filter(pk=game_id).count() != 0
             return render(request, 'game.html', {'game': game, 'owns_game': owns_game})
