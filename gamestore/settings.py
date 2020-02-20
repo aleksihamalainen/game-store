@@ -72,6 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gamestore.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -124,4 +125,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+if "DYNO" in os.environ:
+	STATIC_ROOT = 'staticfiles'
+	import dj_database_url
+	DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+	
+	ALLOWED_HOSTS = ['gamestore.herokuapp.com']
