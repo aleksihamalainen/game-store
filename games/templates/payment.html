@@ -20,8 +20,8 @@
       <input type="hidden" name="error_url" value="http://localhost:8000/payment/{{game.id}}/error">
       <input type="hidden" name="checksum" value="{{checksum}}">
       Amount to be paid {{game.price}}
-      <input class="btn btn-light" type="submit" value="Pay">
-      <button class="btn btn-light" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
+      <input class="btn btn-primary" type="submit" value="Pay">
+      <button class="btn btn-danger" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
     </form>
   </div>
 </body>

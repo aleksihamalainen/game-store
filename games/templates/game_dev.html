@@ -10,7 +10,7 @@
 
 <body>
   {% include 'navbar.html' %}
-  <h2 class="d-flex justify-content-center">
+  <h2 class="d-flex justify-content-center mt-3">
     Game {{game.title}}
   </h2>
   <h3 class="d-flex justify-content-center">Sales statistics</h3>
@@ -19,9 +19,9 @@
   <p class="d-flex justify-content-center">{{ transaction.timestamp }}</p>
   {% endfor %}
   <div class="d-flex justify-content-center">
-    <button class="btn btn-light" onclick="location.href='/games/delete/{{game.id}}'">Delete</button>
+    <button class="btn btn-primary" onclick="location.href='/games/play/{{game.id}}'">Play</button>
     <button class="btn btn-light" onclick="location.href='/games/edit/{{game.id}}'">Edit</button>
-    <button class="btn btn-light" onclick="location.href='/games/play/{{game.id}}'">Play</button>
+    <button class="btn btn-danger" onclick="location.href='/games/delete/{{game.id}}'">Delete</button>
     <button class="btn btn-light" onclick="location.href='/games/all'">Back</button>
   </div>
 </body>
