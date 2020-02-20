@@ -22,6 +22,18 @@
             })
             break;
           }
+          case 'SAVE': {
+            console.log('GAME SAVED')
+            break;
+          }
+          case 'LOAD_REQUEST': {
+            var msg = {
+              'messageType': 'ERROR',
+              'info': 'message sent to game from service'
+            };
+            document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
+            break;
+          }
           default:
             console.log(event.data.messageType);
         }
@@ -38,7 +50,7 @@
   <div class="d-flex justify-content-center">
     <div class='playGame'>
       <form>
-        <iframe src="{{game.url}}">
+        <iframe id="game_frame" src="{{game.url}}">
 
         </iframe>
       </form>
