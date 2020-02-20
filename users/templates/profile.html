@@ -27,7 +27,7 @@
 			<div>
 				<h3>Payment history</h3>
 				{% for transaction in transactions %}
-				<p>{{transaction.game.title}} --- {{ transaction.timestamp }}</p>
+				<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
 				{% endfor %}
 			</div>
 			{% if user.account_type == 'DEV' %}
