@@ -11,6 +11,13 @@
 <body>
   {% include 'navbar.html' %}
   Game {{game.title}}
+  <div>
+    <h3>Sales statistics</h3>
+    <p>Sold: {{transactions.count}}</p>
+    {% for transaction in transactions %}
+    <p>{{ transaction.timestamp }}</p>
+    {% endfor %}
+  </div>
   <button onclick="location.href='/games/delete/{{game.id}}'">Delete</button>
   <button onclick="location.href='/games/edit/{{game.id}}'">Edit</button>
   <button onclick="location.href='/games/play/{{game.id}}'">Play</button>
