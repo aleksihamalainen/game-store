@@ -10,16 +10,19 @@
 
 <body>
 	{% include 'navbar.html' %}
-	{% block content %}
-	<div class='profile_edit'>
-		<form method='POST'>
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type='submit'>Delete</button>
-		</form>
-		<button onclick="location.href='/profile/'">Cancel</button>
+	<span class="d-flex justify-content-center">Are you sure?</span>
+	<div class="d-flex justify-content-center">
+		{% block content %}
+		<div class='profile_edit'>
+			<form method='POST'>
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-light" type='submit'>Delete</button>
+				<button class="btn btn-light" type="button" onclick="location.href='/profile/'">Cancel</button>
+			</form>
+		</div>
+		{% endblock content %}
 	</div>
-	{% endblock content %}
 </body>
 
 </html>

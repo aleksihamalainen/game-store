@@ -10,13 +10,15 @@
 
 <body>
   {% include 'navbar.html' %}
-  Game {{game.title}}
-  {% if owns_game %}
-  <button onclick="location.href='/games/play/{{game.id}}'">Play</button>
-  {% else %}
-  <button onclick="location.href='../purchase/{{game.id}}'">Buy</button>
-  {% endif %}
-  <button onclick="location.href='../all'">Back</button>
+  <div class="d-flex justify-content-center">
+    Game {{game.title}}
+    {% if owns_game %}
+    <button class="btn btn-light" onclick="location.href='/games/play/{{game.id}}'">Play</button>
+    {% else %}
+    <button class="btn btn-light" onclick="location.href='../purchase/{{game.id}}'">Buy</button>
+    {% endif %}
+    <button class="btn btn-light" onclick="location.href='../all'">Back</button>
+  </div>
 </body>
 
 </html>

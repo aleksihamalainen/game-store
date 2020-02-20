@@ -10,19 +10,20 @@
 
 <body>
   {% include 'navbar.html' %}
-  <form action="https://tilkkutakki.cs.aalto.fi/payments/pay" method="POST">
-    <input type="hidden" name="pid" value={{pid}}>
-    <input type="hidden" name="sid" value={{sid}}>
-    <input type="hidden" name="amount" value={{game.price}}>
-    <input type="hidden" name="success_url" value="http://localhost:8000/payment/{{game.id}}/success">
-    <input type="hidden" name="cancel_url" value="http://localhost:8000/payment/{{game.id}}/cancel">
-    <input type="hidden" name="error_url" value="http://localhost:8000/payment/{{game.id}}/error">
-    <input type="hidden" name="checksum" value="{{checksum}}">
-    Amount to be paid {{game.price}}
-    <input type="submit" value="Pay">
-  </form>
-
-  <button onclick="location.href='../../{{game.id}}'">Back</button>
+  <div class="d-flex justify-content-center">
+    <form action="https://tilkkutakki.cs.aalto.fi/payments/pay" method="POST">
+      <input type="hidden" name="pid" value={{pid}}>
+      <input type="hidden" name="sid" value={{sid}}>
+      <input type="hidden" name="amount" value={{game.price}}>
+      <input type="hidden" name="success_url" value="http://localhost:8000/payment/{{game.id}}/success">
+      <input type="hidden" name="cancel_url" value="http://localhost:8000/payment/{{game.id}}/cancel">
+      <input type="hidden" name="error_url" value="http://localhost:8000/payment/{{game.id}}/error">
+      <input type="hidden" name="checksum" value="{{checksum}}">
+      Amount to be paid {{game.price}}
+      <input class="btn btn-light" type="submit" value="Pay">
+      <button class="btn btn-light" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
+    </form>
+  </div>
 </body>
 
 </html>

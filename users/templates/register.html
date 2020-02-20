@@ -12,16 +12,18 @@
 
 <body>
   {% include 'navbar.html' %}
-  {% block content %}
-  <div class='registrationForm text-white ml-5'>
-    <form method='POST'>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type='submit' class="btn btn-light">Register</button>
-    </form>
+  <div class=" d-flex justify-content-center">
+    {% block content %}
+    <div class='registrationForm text-white ml-5'>
+      <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit' class="btn btn-light">Register</button>
+        <a href="/" class="btn btn-danger ml-5 mt-2 active" type="button" role="button" aria-pressed="true">Cancel</a>
+      </form>
+    </div>
+    {% endblock content%}
   </div>
-  {% endblock content%}
-  <a href="/" class="btn btn-danger ml-5 mt-2 active" role="button" aria-pressed="true">Cancel</a>
 </body>
 
 </html>

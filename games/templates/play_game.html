@@ -33,30 +33,31 @@
 
 <body>
   {% include 'navbar.html' %}
-  {% block title %}{{game.title}}{% endblock title%}
   {% block content %}
+  <h2 class="d-flex justify-content-center">{{game.title}}</h2>
+  <div class="d-flex justify-content-center">
+    <div class='playGame'>
+      <form>
+        <iframe src="{{game.url}}">
 
-  <div class='playGame'>
-    <form>
-      <iframe src="{{game.url}}">
-
-      </iframe>
-    </form>
-  </div>
-  <div class="scoreList" style="float:left;">
-    <h3>Highscores</h3>
-    <table>
-      <tr>
-        <th>Player</th>
-        <th>Score</th>
-      </tr>
-      {% for score in scores %}
-      <tr>
-        <td>{{score.user}}</td>
-        <td>{{score.score}}</td>
-      </tr>
-      {% endfor %}
-    </table>
+        </iframe>
+      </form>
+    </div>
+    <div class="scoreList" style="float:left;">
+      <h3>Highscores</h3>
+      <table>
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+        {% for score in scores %}
+        <tr>
+          <td>{{score.user}}</td>
+          <td>{{score.score}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
   {% endblock content%}
 </body>

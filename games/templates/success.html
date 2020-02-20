@@ -10,8 +10,10 @@
 
 <body>
   {% include 'navbar.html' %}
-  success {{game.title}}
-  <button onclick="location.href='/games/all'">Continue</button>
+  <div class="d-flex justify-content-center">
+    success {{game.title}}
+    <button class="btn btn-light" onclick="location.href='/games/all'">Continue</button>
+  </div>
 </body>
 
 </html>

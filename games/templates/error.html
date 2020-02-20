@@ -10,8 +10,10 @@
 
 <body>
   {% include 'navbar.html' %}
-  error {{game.title}}
-  <button onclick="location.href='/games/all'">Back</button>
+  <div class="d-flex justify-content-center">
+    error {{game.title}}
+    <button class="btn btn-light" onclick="location.href='/games/all'">Back</button>
+  </div>
 </body>
 
 </html>

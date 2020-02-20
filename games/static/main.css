@@ -1,11 +1,11 @@
 body {
+  color: white;
   background-color: #555;
   font-family: sans-serif;
 }
 
 .navbar {
   background: #333;
-  width: 100%;
 }
 
 #logo {

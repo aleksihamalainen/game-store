@@ -1,5 +1,5 @@
 {% block content %}
-<div class="navbar text-white">
+<div class="navbar w-100 text-white">
   <div>
     <button class="btn btn-light" onclick="location.href='/games/all'">Browse games</button>
     {% if request.user.account_type == 'DEV' %}
@@ -11,6 +11,7 @@
   </div>
   <div>
     {% if request.user.is_authenticated %}
+    <div class="text-white">Logged in as {{user.username}}</div>
     <button class="btn btn-light" onclick="location.href='/logout'">Log out</button>
     <button class="btn btn-light" onclick="location.href='/profile'">Profile</button>
     {% else %}

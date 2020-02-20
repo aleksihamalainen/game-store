@@ -11,13 +11,13 @@
 <body>
   {% include 'navbar.html' %}
   {% block content %}
-  <div class='addGameForm'>
+  <div class='addGameForm d-flex justify-content-center p-8'>
     <form method='POST'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button type='submit'>Submit game</button>
+      <button class="btn btn-light" type='submit'>Submit game</button>
+      <button class="btn btn-light" type="button" onclick="location.href='/'">Cancel</button>
     </form>
-    <button onclick="location.href='/'">Cancel</button>
   </div>
   {% endblock content%}
 </body>

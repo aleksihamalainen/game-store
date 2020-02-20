@@ -11,16 +11,24 @@
 
 <body>
   {% include 'navbar.html' %}
-  <form>
-    <input class="back-button" type="button" value="Back" onclick="location.href='/'">
-  </form>
-  <h1>Games</h1>
-  <ul>
-    {% for game in games %}
-    <li>{{ game.title }}</li>
-    <button onclick="location.href='../{{game.id}}'">View</button>
-    {% endfor %}
-  </ul>
+  <h2 class="text-center">Games</h2>
+  <div class="d-flex justify-content-center w-100">
+    <ul class="list-group w-75">
+      {% for game in games %}
+      <div class="border border-light rounded w-100">
+        <li class="list-group-item bg-dark float-left">
+          <div>
+            {{ game.title }}
+          </div>
+          <div>
+            {{ game.price }}
+          </div>
+        </li>
+        <button class="btn btn-outline-light float-right h-100" onclick="location.href='../{{game.id}}'">View</button>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
 </body>
 
 </html>
