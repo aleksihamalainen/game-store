@@ -30,19 +30,19 @@
 			<div class="m-3">
 				<h3>Owned games:</h3>
 				{% for game in user.owned_games.all %}
-				<div>{{ game.title }} <button class="btn btn-primary" onclick="location.href='/games/{{game.id}}'">View
+				<p>{{ game.title }} <button class="btn btn-primary" onclick="location.href='/games/{{game.id}}'">View
 					game</button>
-			</div>
+				</p>
 			{% endfor %}
 		</div>
 		<div class="m-3">
 			<h3>Payment history:</h3>
 			{% for transaction in transactions %}
-			<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
+			<p>{{transaction.game.title}} --- {{ transaction.price }}€ {{ transaction.timestamp }}</p>
 			{% endfor %}
 		</div>
 		{% if user.account_type == 'DEV' %}
-		<div class="developed_games m-3">
+		<div class="m-3">
 			<h3>Developed games:</h3>
 			{% for dev_game in developed_games.all %}
 			<p>{{ dev_game.title }} <button class="btn btn-primary"
