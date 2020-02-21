@@ -19,11 +19,22 @@
       </form>
       <p>Searched for: {{search_terms}}</p>
     </div>
-    <div class="search_game_list">
+  </div>
+  <div class="search_game_list d-flex justify-content-center w-100 mt-3">
+    <ul class="list-group w-75">
       {% for game in games %}
-      {{game.title}}
+      <div class="border border-light rounded w-100 m-2">
+        <li class="btn list-group-item" onclick="location.href='../{{game.id}}'">
+          <div style="text-align: center;">
+            <span style="font-size:xx-large;">{{ game.title }}</span>
+          </div>
+          <div style="text-align: center;">
+            <span style="font-size: large;">Price: {{ game.price }}</span>
+          </div>
+        </li>
+      </div>
       {% endfor %}
-    </div>
+    </ul>
   </div>
 </body>
 
