@@ -11,51 +11,52 @@
 </head>
 
 <body>
-  <!--Adds navigation bar on top-->
+	<!--Adds navigation bar on top-->
 	{% include 'navbar.html' %}
 	{% block content %}
 	<div class=" d-flex justify-content-center mt-3">
 		<div class='profileinfo'>
 			<div class="m-3">
-			<h3>User information:</h3>
-			<div>Username: {{ user.username }}</div>
-			{% if request.user.email %}
-			<div>Email: {{ user.email }}</div>
-			{% endif %}
-			{% if request.user.bio %}
-			<div>Bio: {{ user.bio }}</div>
-			{% endif %}
-			<div>User type: {{ user.account_type }}</div>
+				<h3>User information:</h3>
+				<div>Username: {{ user.username }}</div>
+				{% if request.user.email %}
+				<div>Email: {{ user.email }}</div>
+				{% endif %}
+				{% if request.user.bio %}
+				<div>Bio: {{ user.bio }}</div>
+				{% endif %}
+				<div>User type: {{ user.account_type }}</div>
 			</div>
 			<div class="m-3">
 				<h3>Owned games:</h3>
 				{% for game in user.owned_games.all %}
-				<div{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
-						game</button></div>
-				{% endfor %}
+				<div>{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
+					game</button>
 			</div>
-			<div class="m-3">
-				<h3>Payment history:</h3>
-				{% for transaction in transactions %}
-				<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
-				{% endfor %}
-			</div>
-			{% if user.account_type == 'DEV' %}
-			<div class="developed_games m-3">
-				<h3>Developed games:</h3>
-				{% for dev_game in developed_games.all %}
-				<p>{{ dev_game.title }} <button class="btn btn-primary"
-						onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
-				{% endfor %}
-			</div>
-			{% endif %}
-			<div class="m-3">
+			{% endfor %}
+		</div>
+		<div class="m-3">
+			<h3>Payment history:</h3>
+			{% for transaction in transactions %}
+			<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
+			{% endfor %}
+		</div>
+		{% if user.account_type == 'DEV' %}
+		<div class="developed_games m-3">
+			<h3>Developed games:</h3>
+			{% for dev_game in developed_games.all %}
+			<p>{{ dev_game.title }} <button class="btn btn-primary"
+					onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
+			{% endfor %}
+		</div>
+		{% endif %}
+		<div class="m-3">
 			<button class="btn btn-primary" onclick="location.href='./logout'">Log out</button>
 			<button class="btn btn-light" onclick="location.href='./edit'">Edit account</button>
 			<button class="btn btn-light" onclick="location.href='./delete'">Delete account</button>
 			<button class="btn btn-danger" onclick="location.href='/'">Back</button>
 		</div>
-		</div>
+	</div>
 	</div>
 	{% endblock content %}
 </body>

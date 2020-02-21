@@ -4,7 +4,8 @@
 <head>
 
   <title>Gamestore</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
@@ -22,9 +23,9 @@
       <input type="hidden" name="checksum" value="{{checksum}}">
       Amount to be paid: {{game.price}}
       <div class="d-flex justify-content-center">
-      <input class="btn btn-light m-1" type="submit" value="Pay">
-      <button class="btn btn-danger m-1" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
-    </div>
+        <input class="btn btn-light m-1" type="submit" value="Pay">
+        <button class="btn btn-danger m-1" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
+      </div>
     </form>
   </div>
 </body>
