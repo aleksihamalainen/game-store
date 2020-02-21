@@ -15,11 +15,11 @@
       <div class="text-white float-right">Logged in as {{user.username}}</div>
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-light float-right" onclick="location.href='/logout'">Log out</button>
+      <button class="btn btn-light float-right mr-1" onclick="location.href='/logout'">Log out</button>
       <button class="btn btn-light float-right" onclick="location.href='/profile'">Profile</button>
       {% else %}
       <button class="btn btn-light float-right" onclick="location.href='/login'">Log in</button>
-      <button class="btn btn-light float-right" onclick="location.href='/register'">Register</button>
+      <button class="btn btn-light float-right mr-1" onclick="location.href='/register'">Register</button>
       {% endif %}
     </div>
   </div>
