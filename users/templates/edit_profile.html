@@ -10,16 +10,16 @@
 
 <body>
 	{% include 'navbar.html' %}
-	<div class="d-flex justify-content-center">
+	<div class="d-flex justify-content-center mt-3">
 		{% block content %}
 		<div class='profile_edit'>
 			<form method='POST'>
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button class="btn btn-light" type='submit'>Save</button>
+				<button class="btn btn-primary" type='submit'>Save</button>
 			</form>
 			<button class="btn btn-light" onclick="location.href='/profile/edit/change_password'">Change password</button>
-			<button class="btn btn-light" onclick="location.href='/profile/'">Cancel</button>
+			<button class="btn btn-danger" onclick="location.href='/profile/'">Cancel</button>
 		</div>
 		{% endblock content %}
 	</div>

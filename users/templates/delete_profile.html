@@ -17,7 +17,7 @@
 			<form method='POST'>
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button class="btn btn-light" type='submit'>Delete</button>
+				<button class="btn btn-danger" type='submit'>Delete</button>
 				<button class="btn btn-light" type="button" onclick="location.href='/profile/'">Cancel</button>
 			</form>
 		</div>

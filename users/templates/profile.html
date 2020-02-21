@@ -5,43 +5,53 @@
 <head>
 
 	<title>Gamestore</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
 <body>
 	{% include 'navbar.html' %}
 	{% block content %}
-	<div class=" d-flex justify-content-center">
+	<div class=" d-flex justify-content-center mt-3">
 		<div class='profileinfo'>
-			<p>Username: {{ user.username }}</p>
-			<p>Email: {{ user.email }}</p>
-			<p>Bio: {{ user.bio }}</p>
-			<p>User type: {{ user.account_type }}</p>
 			<div>
-				<h3>Owned games</h3>
+			<h3>User information:</h3>
+			<p>Username: {{ user.username }}</p>
+			{% if request.user.email %}
+			<p>Email: {{ user.email }}</p>
+			{% endif %}
+			{% if request.user.bio %}
+			<p>Bio: {{ user.bio }}</p>
+			{% endif %}
+			<p>User type: {{ user.account_type }}</p>
+			</div>
+			<div>
+				<h3>Owned games:</h3>
 				{% for game in user.owned_games.all %}
-				<p>{{ game.title }} <button class="btn btn-primary" onclick="location.href='/games/{{game.id}}'">View game</button></p>
+				<p>{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
+						game</button></p>
 				{% endfor %}
 			</div>
 			<div>
-				<h3>Payment history</h3>
+				<h3>Payment history:</h3>
 				{% for transaction in transactions %}
 				<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
 				{% endfor %}
 			</div>
 			{% if user.account_type == 'DEV' %}
 			<div class="developed_games">
-				<h3>Developed games</h3>
+				<h3>Developed games:</h3>
 				{% for dev_game in developed_games.all %}
-				<p>{{ dev_game.title }} <button class="btn btn-primary" onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
+				<p>{{ dev_game.title }} <button class="btn btn-primary"
+						onclick="location.href='/games/{{dev_game.id}}'">View game</button></p>
 				{% endfor %}
 			</div>
 			{% endif %}
 			<button class="btn btn-primary" onclick="location.href='./logout'">Log out</button>
-			<button class="btn btn-primary" onclick="location.href='./edit'">Edit account</button>
-			<button class="btn btn-primary" onclick="location.href='./delete'">Delete account</button>
-			<button class="btn btn-primary" onclick="location.href='/'">Back</button>
+			<button class="btn btn-light" onclick="location.href='./edit'">Edit account</button>
+			<button class="btn btn-light" onclick="location.href='./delete'">Delete account</button>
+			<button class="btn btn-danger" onclick="location.href='/'">Back</button>
 		</div>
 	</div>
 	{% endblock content %}

@@ -11,12 +11,12 @@
 <body>
   {% include 'navbar.html' %}
   {% block content %}
-  <div class='editGameForm d-flex justify-content-center pt-10'>
+  <div class='editGameForm d-flex justify-content-center pt-10 mt-3'>
     <form method='POST'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="btn btn-light" type='submit'>Save changes</button>
-      <button class="btn btn-light" type="button" onclick="location.href='/games/{{game.id}}/'">Cancel</button>
+      <button class="btn btn-primary" type='submit'>Save changes</button>
+      <button class="btn btn-danger" type="button" onclick="location.href='/games/{{game.id}}/'">Cancel</button>
     </form>
   </div>
   {% endblock content%}
