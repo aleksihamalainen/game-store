@@ -68,3 +68,13 @@ Paavo and Aleksi focused more on django and Markus more on HTML.
 
 ## Using application
 First you register to the service as player or developer. Then everything is pretty self explanatory as there is the navbar with options to choose from. You can edit games from owned games in profile view. Buy games from browsing by clicking the game you want.
+
+Example users on heroku:
+
+(username - password)
+
+testdev1 - jcKQrVCu
+
+testdev2 - Y63UEXIeh
+
+admin - xgLT0qqZ
