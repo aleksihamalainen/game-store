@@ -31,7 +31,8 @@ def search_games(request):
         form = SearchGamesForm(request.POST)
         data = request.POST['search_terms']
         search_terms = list(filter(lambda x: x != ' ', data.split(' ')))
-        games = Game.objects.filter(reduce(operator.and_, (Q(tags__contains = i) for i in search_terms)))
+        title = request.POST['search_title']
+        games = Game.objects.filter(reduce(operator.and_, (Q(tags__contains = i) & Q(title__contains = title) for i in search_terms)))
         print(games)
         return render(request, 'search_games.html', {'form': form, 'games': games, 'search_terms': str(search_terms)})
     else:

@@ -32,8 +32,9 @@ class EditGameForm(ModelForm):
 
 class SearchGamesForm(forms.Form):
     
+    search_title = forms.CharField(max_length = 1000, required = False)
     search_terms = forms.CharField(max_length = 1000, required = False)
     
     class Meta:
         model = Game
-        fields = ('search_terms',)
+        fields = ('search_terms','search_title')
