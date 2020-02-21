@@ -1,23 +1,27 @@
 {% block content %}
 <div class="navbar w-100 text-white">
-  <div>
+  <div class="col">
     <button class="btn btn-light" onclick="location.href='/games/all'">Browse games</button>
     {% if request.user.account_type == 'DEV' %}
     <button class="btn btn-light" onclick="location.href='/games/add'">Add game</button>
     {% endif %}
   </div>
-  <div>
-    <h1 class="btn" id="logo" onclick="location.href='/'">Gamestore</h1>
+  <div class="col">
+    <h1 class="btn d-flex justify-content-center" id="logo" onclick="location.href='/'">Gamestore</h1>
   </div>
-  <div>
+  <div class="col">
     {% if request.user.is_authenticated %}
-    <div class="text-white">Logged in as {{user.username}}</div>
-    <button class="btn btn-light" onclick="location.href='/logout'">Log out</button>
-    <button class="btn btn-light" onclick="location.href='/profile'">Profile</button>
-    {% else %}
-    <button class="btn btn-light" onclick="location.href='/login'">Log in</button>
-    <button class="btn btn-light" onclick="location.href='/register'">Register</button>
-    {% endif %}
+    <div class="d-flex justify-content-end">
+      <div class="text-white float-right">Logged in as {{user.username}}</div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-light float-right" onclick="location.href='/logout'">Log out</button>
+      <button class="btn btn-light float-right" onclick="location.href='/profile'">Profile</button>
+      {% else %}
+      <button class="btn btn-light float-right" onclick="location.href='/login'">Log in</button>
+      <button class="btn btn-light float-right" onclick="location.href='/register'">Register</button>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock content %}
