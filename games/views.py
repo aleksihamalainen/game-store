@@ -45,6 +45,9 @@ def edit_game(request, game_id):
             if form.is_valid():
                 form.save()
                 return redirect(f'/games/{game.id}/')
+            else:
+                form = EditGameForm(instance = game)
+                return render(request, 'edit_game.html', {'form': form, 'game': game , 'errorMessage': 'Failed to edit game!'})
         else:
             form = EditGameForm(instance = game)
             return render(request, 'edit_game.html', {'form': form, 'game': game})
@@ -191,7 +194,7 @@ def add_game(request):
             return redirect('games')
         else:
             form = AddGameForm()
-            return render(request, './add_game_form.html', {'form': form})
+            return render(request, './add_game_form.html', {'form': form, 'errorMessage': 'Failed to add game!'})
     else:
         form = AddGameForm()
         return render(request, './add_game_form.html', {'form': form})

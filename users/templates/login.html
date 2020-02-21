@@ -17,6 +17,9 @@
   <div class="d-flex justify-content-center mt-3">
     {% block content %}
     <div class='loginForm text-white ml-5'>
+      {% if errorMessage %}
+        <p style = "color:red;">{{errorMessage}}</p>
+      {% endif %}
       <form method='POST'>
         {% csrf_token %}
         {{ form.as_p }}

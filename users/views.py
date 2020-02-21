@@ -32,7 +32,8 @@ def login_view(request):
 			login(request, user)
 			return redirect('index')
 		else:
-			return redirect('index')
+			form = LoginForm()
+			return render(request, 'login.html', {'form': form, 'errorMessage': 'Login failed!'})
 	else:
 		form = LoginForm()
 		return render(request, 'login.html', {'form': form})
@@ -47,7 +48,7 @@ def edit_profile_view(request):
 			return redirect('profile')
 		else:
 			form = EditProfileForm(instance = request.user)
-			return render(request, 'edit_profile.html', {'form': form})
+			return render(request, 'edit_profile.html', {'form': form, 'errorMessage': 'Failed to edit profile!'})
 
 	else:
 		form = EditProfileForm(instance = request.user)
@@ -64,7 +65,7 @@ def change_password_view(request):
 			return redirect('profile')
 		else:
 			form = PasswordChangeForm(user)
-			return render(request, 'edit_profile.html', {'form': form})
+			return render(request, 'edit_profile.html', {'form': form, 'errorMessage': 'Failed to change password!'})
 	else:
 		form = PasswordChangeForm(user)
 		return render(request, 'edit_profile.html', {'form': form})
@@ -113,8 +114,7 @@ def register(request):
 			login(request, user)
 			return redirect('index')
 		else:
-			form = RegistrationForm()
-			return render(request, 'register.html', {'form' : form})
+			return render(request, 'register.html', {'form' : form, 'errorMessage': 'Registration failed!'})
 	else:
 		form = RegistrationForm()
 		return render(request, 'register.html', {'form' : form})
