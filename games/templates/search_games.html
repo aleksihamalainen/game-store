@@ -1,22 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Search</title>
+  <title>Search</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
+
 <body>
-     <div class = "search_form">
-        <form method = 'POST'>
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button class="btn btn-primary" type='submit'>Search</button>
-         </form>
-         <p>Searched for: {{search_terms}}</p>
+  {% include 'navbar.html' %}
+  <div class="d-flex justify-content-center">
+    <div class="search_form">
+      <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button class="btn btn-primary" type='submit'>Search</button>
+      </form>
+      <p>Searched for: {{search_terms}}</p>
     </div>
-    <div class = "search_game_list">
-         {% for game in games %}
-            {{game.title}}
-         {% endfor %}
+    <div class="search_game_list">
+      {% for game in games %}
+      {{game.title}}
+      {% endfor %}
     </div>
+  </div>
 </body>
+
 </html>
