@@ -40,7 +40,6 @@
                   'messageType': 'ERROR',
                   'info': 'Failed to save the game!',
                 }
-                //document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
                 sendMSG(msg);
               }
             });
@@ -56,7 +55,6 @@
                 'messageType': 'LOAD',
                 'gameState': result,
               }
-              //document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
               sendMSG(msg);
             }).fail(function () {
               const msg = {
@@ -65,7 +63,6 @@
               }
               sendMSG(msg);
             });
-            //document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
             break;
           }
 
@@ -75,8 +72,7 @@
             $('#game_frame').height(options.height);
             break;
           }
-          default:
-            console.log(event.data.messageType);
+          default: console.log(event.data.messageType);
         }
       }
       window.addEventListener("message", receiveMessage, false);
