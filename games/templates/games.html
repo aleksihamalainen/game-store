@@ -14,16 +14,15 @@
   <div class="d-flex justify-content-center w-100 mt-3">
     <ul class="list-group w-75">
       {% for game in games %}
-      <div class="border border-light rounded w-100">
-        <li class="list-group-item bg-dark float-left">
-          <div>
-            {{ game.title }}
+      <div class="border border-light rounded w-100 m-2">
+        <li class="btn list-group-item" onclick="location.href='../{{game.id}}'">
+          <div style="text-align: center;">
+            <span style="font-size:xx-large;">{{ game.title }}</span>
           </div>
-          <div>
-            {{ game.price }}
+          <div style="text-align: center;">
+            <span style="font-size: large;">Price: {{ game.price }}</span>
           </div>
         </li>
-        <button class="btn btn-outline-light float-right h-100" onclick="location.href='../{{game.id}}'">View</button>
       </div>
       {% endfor %}
     </ul>
