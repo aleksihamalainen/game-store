@@ -3,9 +3,12 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, JsonResponse
 from .models import Game, Score, Transaction, GameState
 from users.models import Developer, Account
-from .forms import AddGameForm, DeleteGameForm, EditGameForm
+from .forms import AddGameForm, DeleteGameForm, EditGameForm, SearchGamesForm
 from django.contrib.auth.decorators import login_required
 from hashlib import md5
+from django.db.models import Q
+import operator
+from functools import reduce
 
 def list_games(request):
     games = Game.objects.all()
@@ -22,6 +25,18 @@ def view_game(request, game_id):
             owns_game = user.owned_games.filter(pk=game_id).count() != 0
             return render(request, 'game.html', {'game': game, 'owns_game': owns_game})
     return render(request, 'game.html', {'game': game})
+
+def search_games(request):
+    if request.method == 'POST':
+        form = SearchGamesForm(request.POST)
+        data = request.POST['search_terms']
+        search_terms = list(filter(lambda x: x != ' ', data.split(' ')))
+        games = Game.objects.filter(reduce(operator.and_, (Q(tags__contains = i) for i in search_terms)))
+        print(games)
+        return render(request, 'search_games.html', {'form': form, 'games': games, 'search_terms': str(search_terms)})
+    else:
+        form = SearchGamesForm()
+        return render(request, 'search_games.html', {'form': form})
 
 @login_required
 def edit_game(request, game_id):
@@ -166,12 +181,18 @@ def add_game(request):
             price = form.cleaned_data['price']
             url = form.cleaned_data['url']
             dev = Developer.objects.get(user_id = user.id)
+
+            #tags = ';'.join(list(map(lambda x: x.strip(), form.cleaned_data['tags'].split('\n'))))
+            tags = '\n'.join(list(map(lambda x: x.strip(), form.cleaned_data['tags'].split('\n'))))
+            print(tags)
+            
             game = Game(
                 title = title,
                 description = description,
                 price = price,
                 url = url,
-                developer = dev)
+                developer = dev,
+                tags = tags)
             game.save()
             return redirect('games')
         else:
