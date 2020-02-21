@@ -12,7 +12,7 @@ from .models import Account
 
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required = False)
-	bio = forms.CharField(max_length = 1000, required = False)
+	bio = forms.CharField(max_length = 1000, required = False, widget=forms.Textarea())
 
 	class Meta:
 		model = Account
