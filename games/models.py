@@ -18,3 +18,8 @@ class Transaction(models.Model):
     game = models.ForeignKey('Game', on_delete = models.CASCADE)
     price = models.DecimalField(default = 0.01, max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
     timestamp = models.DateTimeField(auto_now=True)
+
+class GameState(models.Model):
+    state = models.TextField(default = '')
+    user = models.ForeignKey('users.Account', on_delete = models.CASCADE)
+    game = models.ForeignKey('Game', on_delete = models.CASCADE)

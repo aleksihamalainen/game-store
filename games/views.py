@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
-from .models import Game, Score, Transaction
+from django.http import HttpResponse, JsonResponse
+from .models import Game, Score, Transaction, GameState
 from users.models import Developer, Account
 from .forms import AddGameForm, DeleteGameForm, EditGameForm
 from django.contrib.auth.decorators import login_required
@@ -98,6 +98,32 @@ def submit_score(request, game_id):
             return HttpResponse('success')
     else:
         return HttpResponse('fail')
+
+@login_required
+def save_game(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    if user is None:
+        return HttpResponse('fail')
+    if user.owned_games.filter(pk=game_id).count() != 0 or user.id == game.developer.user_id:
+        new_save = request.GET['gameState']
+        try:
+            gamestate = GameState.objects.get(game_id = game_id, user_id = user.id)
+            gamestate.state = new_save
+        except:
+            gamestate = GameState(state = new_save, user = user, game = game)    
+        gamestate.save()
+        return HttpResponse('success')
+            
+    else:
+        return HttpResponse('fail')
+
+@login_required
+def load_game(request, game_id):
+    user = request.user
+    game = get_object_or_404(Game, id = game_id)
+    state = get_object_or_404(GameState, game_id = game_id, user_id = user.id)
+    return HttpResponse(state.state)
 
 @login_required
 def purchase_game(request, game_id):
