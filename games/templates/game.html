@@ -4,7 +4,8 @@
 <head>
 
   <title>Gamestore</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
@@ -12,13 +13,15 @@
   {% include 'navbar.html' %}
   <div class="d-flex justify-content-center mt-3">
     <h1>{{game.title}}</h1>
-    {% if owns_game %}
-    <button class="btn btn-light" onclick="location.href='/games/play/{{game.id}}'">Play</button>
-    {% else %}
-    <button class="btn btn-light" onclick="location.href='../purchase/{{game.id}}'">Buy</button>
-    {% endif %}
-    <button class="btn btn-danger" onclick="location.href='../all'">Back</button>
   </div>
+    <div class="d-flex justify-content-center">
+      {% if owns_game %}
+      <button class="btn btn-light m-1" onclick="location.href='/games/play/{{game.id}}'">Play</button>
+      {% else %}
+      <button class="btn btn-light m-1" onclick="location.href='../purchase/{{game.id}}'">Buy</button>
+      {% endif %}
+      <button class="btn btn-danger m-1" onclick="location.href='../all'">Back</button>
+    </div>
 </body>
 
 </html>

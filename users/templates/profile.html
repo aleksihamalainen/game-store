@@ -15,32 +15,32 @@
 	{% block content %}
 	<div class=" d-flex justify-content-center mt-3">
 		<div class='profileinfo'>
-			<div>
+			<div class="m-3">
 			<h3>User information:</h3>
-			<p>Username: {{ user.username }}</p>
+			<div>Username: {{ user.username }}</div>
 			{% if request.user.email %}
-			<p>Email: {{ user.email }}</p>
+			<div>Email: {{ user.email }}</div>
 			{% endif %}
 			{% if request.user.bio %}
-			<p>Bio: {{ user.bio }}</p>
+			<div>Bio: {{ user.bio }}</div>
 			{% endif %}
-			<p>User type: {{ user.account_type }}</p>
+			<div>User type: {{ user.account_type }}</div>
 			</div>
-			<div>
+			<div class="m-3">
 				<h3>Owned games:</h3>
 				{% for game in user.owned_games.all %}
-				<p>{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
-						game</button></p>
+				<div{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
+						game</button></div>
 				{% endfor %}
 			</div>
-			<div>
+			<div class="m-3">
 				<h3>Payment history:</h3>
 				{% for transaction in transactions %}
 				<p>{{transaction.game.title}} --- {{ transaction.price }} € {{ transaction.timestamp }}</p>
 				{% endfor %}
 			</div>
 			{% if user.account_type == 'DEV' %}
-			<div class="developed_games">
+			<div class="developed_games m-3">
 				<h3>Developed games:</h3>
 				{% for dev_game in developed_games.all %}
 				<p>{{ dev_game.title }} <button class="btn btn-primary"
@@ -48,10 +48,12 @@
 				{% endfor %}
 			</div>
 			{% endif %}
+			<div class="m-3">
 			<button class="btn btn-primary" onclick="location.href='./logout'">Log out</button>
 			<button class="btn btn-light" onclick="location.href='./edit'">Edit account</button>
 			<button class="btn btn-light" onclick="location.href='./delete'">Delete account</button>
 			<button class="btn btn-danger" onclick="location.href='/'">Back</button>
+		</div>
 		</div>
 	</div>
 	{% endblock content %}

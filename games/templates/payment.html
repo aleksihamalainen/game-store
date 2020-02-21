@@ -19,9 +19,11 @@
       <input type="hidden" name="cancel_url" value="http://localhost:8000/payment/{{game.id}}/cancel">
       <input type="hidden" name="error_url" value="http://localhost:8000/payment/{{game.id}}/error">
       <input type="hidden" name="checksum" value="{{checksum}}">
-      Amount to be paid {{game.price}}
-      <input class="btn btn-primary" type="submit" value="Pay">
-      <button class="btn btn-danger" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
+      Amount to be paid: {{game.price}}
+      <div class="d-flex justify-content-center">
+      <input class="btn btn-light m-1" type="submit" value="Pay">
+      <button class="btn btn-danger m-1" type="button" onclick="location.href='../../{{game.id}}'">Back</button>
+    </div>
     </form>
   </div>
 </body>
