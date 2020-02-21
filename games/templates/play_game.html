@@ -4,15 +4,17 @@
 
 <head>
   <title>{{game.title}}</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function() {
-      function sendMSG(msg){
+    $(document).ready(function () {
+      function sendMSG(msg) {
         document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
       }
+
       function receiveMessage(event) {
         switch (event.data.messageType) {
           case 'SCORE': {
@@ -32,8 +34,8 @@
               data: {
                 'gameState': JSON.stringify(state),
               }
-            }).done(function(data){
-              if(data !== 'success'){
+            }).done(function (data) {
+              if (data !== 'success') {
                 const msg = {
                   'messageType': 'ERROR',
                   'info': 'Failed to save the game!',
@@ -47,7 +49,7 @@
           case 'LOAD_REQUEST': {
             $.ajax({
               url: '/games/load_game/{{game.id}}/',
-            }).done(function(data){
+            }).done(function (data) {
               const result = JSON.parse(data)
               console.log(result);
               const msg = {
@@ -56,12 +58,12 @@
               }
               //document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
               sendMSG(msg);
-            }).fail(function(){
+            }).fail(function () {
               const msg = {
-                  'messageType': 'ERROR',
-                  'info': 'Failed to load the game!',
-                }
-                sendMSG(msg);
+                'messageType': 'ERROR',
+                'info': 'Failed to load the game!',
+              }
+              sendMSG(msg);
             });
             //document.getElementById('game_frame').contentWindow.postMessage(msg, '{{game.url}}');
             break;
@@ -83,9 +85,10 @@
 </head>
 
 <body>
+  <!--Adds navigation bar on top-->
   {% include 'navbar.html' %}
   {% block content %}
-  <h2 class="d-flex justify-content-center">{{game.title}}</h2>
+  <h2 class="d-flex justify-content-center mt-3 mb-5">{{game.title}}</h2>
   <div class="d-flex justify-content-center">
     <div class='playGame'>
       <form>
@@ -94,7 +97,7 @@
         </iframe>
       </form>
     </div>
-    <div class="scoreList" style="float:left;">
+    <div class="scoreList ml-5" style="float:left;">
       <h3>Highscores</h3>
       <table>
         <tr>

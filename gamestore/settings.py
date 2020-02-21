@@ -136,3 +136,5 @@ if "DYNO" in os.environ:
 	DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 	
 	ALLOWED_HOSTS = ['blooming-falls-61222.herokuapp.com']
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

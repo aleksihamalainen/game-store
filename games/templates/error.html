@@ -4,15 +4,19 @@
 <head>
 
   <title>Gamestore</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 </head>
 
 <body>
+  <!--Adds navigation bar on top-->
   {% include 'navbar.html' %}
-  <div class="d-flex justify-content-center">
-    error {{game.title}}
-    <button class="btn btn-light" onclick="location.href='/games/all'">Back</button>
+  <div class="d-flex justify-content-center mt-3">
+    Error
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button class="btn btn-danger" onclick="location.href='/games/all'">Back</button>
   </div>
 </body>
 

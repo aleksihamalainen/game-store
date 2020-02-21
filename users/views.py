@@ -7,6 +7,7 @@ from games.models import Game, Transaction
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 @login_required
 def profile(request):
@@ -81,6 +82,16 @@ def logout_view(request):
 	logout(request)
 	return redirect('index')
 
+def verify(request):
+	user = request.user
+	send_mail(
+    'Email verification',
+    'Please verify your email',
+    'gamestore@gmail.com',
+    [user.email],
+    fail_silently=False,
+	)
+
 def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
@@ -93,9 +104,11 @@ def register(request):
 			if acc_type == 'DEV':
 				developer = Developer(user_id = acc_id)
 				developer.save()
+				verify(developer)
 			else:
 				player = Player(user_id = acc_id)
 				player.save()
+				verify(player)
 			user = authenticate(request, username = username, password = password)
 			login(request, user)
 			return redirect('index')
