@@ -78,3 +78,5 @@ testdev1 - jcKQrVCu
 testdev2 - Y63UEXIeh
 
 admin - xgLT0qqZ
+
+testplayer1 - gk3NfPJT
