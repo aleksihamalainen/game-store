@@ -33,7 +33,7 @@ def login_view(request):
 			return redirect('index')
 		else:
 			form = LoginForm()
-			return render(request, 'login.html', {'form': form, 'errorMessage': 'Login failed!'})
+			return render(request, 'login.html', {'form': form, 'errorMessage': 'User does not exist or wrong password!'})
 	else:
 		form = LoginForm()
 		return render(request, 'login.html', {'form': form})
