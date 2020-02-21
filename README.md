@@ -30,7 +30,7 @@ During the project we will meet whenever necessary. Due to the small size of the
 We will use django.contrib.auth.models.Group models to categorize users and give different permissions to developers and players. The correct group would be chosen during registration. Game-models will include information about eg. developers of games, prices, etc. One way to implement the list of the games and game inventory is with models. The structure we could use in this are List Fields.
 
 
-## Timetable 
+## Timetable
 There will be 6 weeks of time for doing this project. The division of workload between the weeks will be approximately as presented below.
 1. Planning how to start the project and familiarizing ourselves with the libraries we will use.
 2. Implementing the basics of the website
@@ -38,3 +38,33 @@ There will be 6 weeks of time for doing this project. The division of workload b
 4. Basic developer functionalities, game/service interaction
 5. Begin work on additional features
 6. Continuing the additional features, security, finishing the project
+
+
+# Final submission
+https://blooming-falls-61222.herokuapp.com/
+
+
+## Implemented Features
+We have implemented all mandatory features and some extra features. Extra features are mobile friendliness, save/load and resolution. Everything we have done was not too hard.
+### Authentication
+We have done only minimum requirements so we would give 100 points. Email validation was too time consuming.
+### Basic player functionalities
+300 points, because every functionality was done properly.
+### Basic developer functionalities
+200 points, because every functionality was done properly.
+### Game/service interaction
+200 points, because every functionality was done properly.
+### Quality of work
+100 points, because every criterion was done properly.
+### Save/load and resolution feature
+100 points, no problems with this.
+### Mobile Friendly
+50 points, bootstrap was used.
+
+
+## Dividing work
+Paavo and Aleksi focused more on django and Markus more on HTML.
+
+
+## Using application
+First you register to the service as player or developer. Then everything is pretty self explanatory as there is the navbar with options to choose from. You can edit games from owned games in profile view. Buy games from browsing by clicking the game you want.
