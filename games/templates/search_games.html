@@ -10,14 +10,13 @@
 
 <body>
   {% include 'navbar.html' %}
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mt-3">
     <div class="search_form">
       <form method='POST'>
         {% csrf_token %}
         {{ form.as_p}}
         <button class="btn btn-primary" type='submit'>Search</button>
       </form>
-      <p>Searched for: {{search_terms}}</p>
     </div>
   </div>
   <div class="search_game_list d-flex justify-content-center w-100 mt-3">
@@ -31,6 +30,11 @@
           <div style="text-align: center;">
             <span style="font-size: large;">Price: {{ game.price }}</span>
           </div>
+          {% if game.tags %}
+          <div style="text-align: center;">
+            <span style="font-size: large;">Tags: {{ game.tags }}</span>
+          </div>
+          {% endif %}
         </li>
       </div>
       {% endfor %}

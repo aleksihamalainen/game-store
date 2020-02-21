@@ -30,7 +30,7 @@
 			<div class="m-3">
 				<h3>Owned games:</h3>
 				{% for game in user.owned_games.all %}
-				<div>{{ game.title }} <button class="btn btn-light" onclick="location.href='/games/{{game.id}}'">View
+				<div>{{ game.title }} <button class="btn btn-primary" onclick="location.href='/games/{{game.id}}'">View
 					game</button>
 			</div>
 			{% endfor %}

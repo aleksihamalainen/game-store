@@ -10,10 +10,6 @@ from django.db.models import Q
 import operator
 from functools import reduce
 
-def list_games(request):
-    games = Game.objects.all()
-    return render(request, 'games.html', {'games': games})
-
 def view_game(request, game_id):
     game = get_object_or_404(Game, id = game_id)
     user = request.user
@@ -32,11 +28,11 @@ def search_games(request):
         data = request.POST['search_terms']
         search_terms = list(filter(lambda x: x != ' ', data.split(' ')))
         games = Game.objects.filter(reduce(operator.and_, (Q(tags__contains = i) for i in search_terms)))
-        print(games)
         return render(request, 'search_games.html', {'form': form, 'games': games, 'search_terms': str(search_terms)})
     else:
+        games = Game.objects.all()
         form = SearchGamesForm()
-        return render(request, 'search_games.html', {'form': form})
+        return render(request, 'search_games.html', {'form': form, 'games': games})
 
 @login_required
 def edit_game(request, game_id):
@@ -181,10 +177,7 @@ def add_game(request):
             price = form.cleaned_data['price']
             url = form.cleaned_data['url']
             dev = Developer.objects.get(user_id = user.id)
-
-            #tags = ';'.join(list(map(lambda x: x.strip(), form.cleaned_data['tags'].split('\n'))))
             tags = '\n'.join(list(map(lambda x: x.strip(), form.cleaned_data['tags'].split('\n'))))
-            print(tags)
             
             game = Game(
                 title = title,
