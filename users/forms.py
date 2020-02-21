@@ -8,10 +8,12 @@ from django.contrib.auth.forms import (
 
 from .models import Account
 
+# Forms for profile related functionalities
+
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required = False)
 	bio = forms.CharField(max_length = 1000, required = False)
-	
+
 	class Meta:
 		model = Account
 		fields = ('username', 'email', 'bio', 'password1', 'password2', 'account_type')
@@ -31,7 +33,7 @@ class DeleteAccountForm():
 		fields = ()
 
 class EditProfileForm(forms.ModelForm):
-	
+
 	class Meta:
 		model = Account
 		fields = ('username','email', 'bio')
