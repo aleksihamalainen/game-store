@@ -1,8 +1,8 @@
 # Project plan
 Team Members
-Paavo Kaijala 608952
-Aleksi Hämäläinen 655109
-Markus Mantila 596815
+* Aleksi Hämäläinen
+* Paavo Kaijala
+* Markus Mantila
 
 
 ## Features
